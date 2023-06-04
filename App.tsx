@@ -2,11 +2,12 @@ import { StatusBar } from 'expo-status-bar'
 import { StyleSheet, Text, View } from 'react-native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { NavigationContainer } from '@react-navigation/native'
-import { Ionicons } from '@expo/vector-icons'
+import { Ionicons } from '@expo/vector-icons';
 
 import HomeScreen from './components/HomeScreen'
 import SettingsScreen from './components/SettingsScreen'
 import ProductsScreen from './components/ProductsScreen'
+import { ComponentProps } from "react";
 
 const Tab = createBottomTabNavigator();
 
@@ -20,7 +21,6 @@ type RouteOp = {
     name:string
   }
 }
-
 
 
 export default function App() {
@@ -40,7 +40,7 @@ export default function App() {
                 ? 'md-cart-outline' 
                 : 'md-cart-outline'
             }
-            else if (route?.name === 'ProductsScreen') {
+            else if (route?.name === 'Products') {
               hola = focused 
                 ? 'list-circle-outline' 
                 : 'list'
@@ -49,15 +49,15 @@ export default function App() {
                       name={hola} 
                       size={size} 
                       color={color} 
-                    />;
+                    />
           },
-          tabBarActiveTintColor: 'tomato',
+          tabBarActiveTintColor: '#00FF7F',
           tabBarInactiveTintColor: 'gray',
         })}
       >
         <Tab.Screen name="Home" component={HomeScreen} />
         <Tab.Screen name="Settings" component={SettingsScreen} />
-        <Tab.Screen name="ProductsScreen" component={ProductsScreen} />
+        <Tab.Screen name="Products" component={ProductsScreen} />
       </Tab.Navigator>
     </NavigationContainer>
   )
