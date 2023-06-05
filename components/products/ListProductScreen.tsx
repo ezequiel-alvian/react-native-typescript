@@ -1,32 +1,38 @@
 import React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
-import { ListProduct } from '../../types/types'
+import { View, Text, StyleSheet, TouchableHighlight } from 'react-native'
+import { ListProduct, Props, Nav } from '../../types/types'
 import { ListItem, Button } from '@rneui/themed';
 import TabletPromotion from './TabletPromotion'
 import { Dimensions } from "react-native"
+import { useNavigation } from '@react-navigation/native';
 
 const ListProductScreen = ({item}: { item: ListProduct }) => {
+    
+    const { navigate } = useNavigation<Nav>();
+    const onPress = () => {
+        return navigate('SpecificProduct')
+    }
 
     return (
-    <ListItem style={styles.cardContainer}>
-        <ListItem.Content key={item.id}>
-                {item.promotion && <TabletPromotion promotion={item.promotion}/>}
-                <View style={styles.cardDisplay}>
-                    <View style={styles.cardImage}></View>
-                    <View style={styles.containerText}>
-                        <ListItem.Title style={styles.title}>{item.product}</ListItem.Title>
-                        <ListItem.Subtitle style={styles.subTitle}>{item.city} - {item.location}</ListItem.Subtitle>
-                        <Text style={styles.textColor} >${item.price}</Text>
-                        <Text style={styles.text}>{item.amount} kg</Text>
+        <ListItem style={styles.cardContainer} onPress={onPress}>
+            <ListItem.Content key={item.id}>
+                    {item.promotion && <TabletPromotion promotion={item.promotion}/>}
+                    <View style={styles.cardDisplay}>
+                        <View style={styles.cardImage}></View>
+                        <View style={styles.containerText}>
+                            <ListItem.Title style={styles.title}>{item.product}</ListItem.Title>
+                            <ListItem.Subtitle style={styles.subTitle}>{item.city} - {item.location}</ListItem.Subtitle>
+                            <Text style={styles.textColor} >${item.price}</Text>
+                            <Text style={styles.text}>{item.amount} kg</Text>
+                        </View>
                     </View>
-                </View>
-                <View style={styles.containerButton}>
-                    <Button titleStyle={{color:'#000'}} buttonStyle={styles.buttonCustom}>+</Button>
-                    <View><Text>0</Text></View>
-                    <Button titleStyle={{color:'#000'}} buttonStyle={styles.buttonCustom}>-</Button>
-                </View>
-        </ListItem.Content>
-    </ListItem>
+                    {/* <View style={styles.containerButton}>
+                        <Button titleStyle={{color:'#000'}} buttonStyle={styles.buttonCustom}>+</Button>
+                        <View><Text>0</Text></View>
+                        <Button titleStyle={{color:'#000'}} buttonStyle={styles.buttonCustom}>-</Button>
+                    </View> */}
+            </ListItem.Content>
+        </ListItem>
     )
 }
 
@@ -52,7 +58,7 @@ const styles = StyleSheet.create({
         marginRight:20,
     },
     containerText:{
-        marginBottom:20
+        marginBottom:5
     },
     title: {
         fontSize:20,
