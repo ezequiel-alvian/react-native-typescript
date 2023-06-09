@@ -4,7 +4,7 @@ export interface ListProduct {
     amount : number
     available: boolean
     city: string
-    location: string
+    location: string | undefined
     name: string
     price: number
     product: string
@@ -13,25 +13,22 @@ export interface ListProduct {
     promotion: number
 }
 
-type RootStackParamList = {
-    Home: undefined
-    Profile: ListProduct
-    Feed: { sort: 'latest' | 'top' } | undefined;
+
+export interface RouteScreens {
+    key?: string | undefined
+    name?: string | undefined
+    params?: string | undefined
 }
 
-export type Props = NativeStackScreenProps<RootStackParamList, 'Profile'>
+export type Foo = (route: RouteScreens) => void
+
 
 export type Nav = {
     navigate: (value: string) => void;
 }
 
-export type TabIcon = {
-focused: boolean
-color: string
-size: number
-}
-export type RouteOp = {
-    route:{
-        name:string
-    }
-}
+export type RootStackParamList = {
+    Home: undefined
+    SpecificProduct: undefined
+  };
+

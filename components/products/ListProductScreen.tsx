@@ -1,20 +1,24 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { View, Text, StyleSheet, TouchableHighlight } from 'react-native'
-import { ListProduct, Props, Nav } from '../../types/types'
-import { ListItem, Button } from '@rneui/themed';
+import { ListProduct, Nav } from '../../types/types'
+import { ListItem, Button } from '@rneui/themed'
 import TabletPromotion from './TabletPromotion'
-import { Dimensions } from "react-native"
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native'
+import { useDispatch, useSelector } from "react-redux";
+import { addTasks } from '../../reducer/productsReducer'
 
 const ListProductScreen = ({item}: { item: ListProduct }) => {
     
-    const { navigate } = useNavigation<Nav>();
-    const onPress = () => {
-        return navigate('SpecificProduct')
-    }
+    const { navigate } = useNavigation<Nav>()
+    const dispatch = useDispatch()
 
+    const onPress = ({item}:{item:ListProduct}) => { 
+        navigate('SpecificProduct') 
+        dispatch(addTasks(item))
+    }
+    
     return (
-        <ListItem style={styles.cardContainer} onPress={onPress}>
+        <ListItem style={styles.cardContainer} onPress={()=> onPress({item})}>
             <ListItem.Content key={item.id}>
                     {item.promotion && <TabletPromotion promotion={item.promotion}/>}
                     <View style={styles.cardDisplay}>
@@ -26,11 +30,6 @@ const ListProductScreen = ({item}: { item: ListProduct }) => {
                             <Text style={styles.text}>{item.amount} kg</Text>
                         </View>
                     </View>
-                    {/* <View style={styles.containerButton}>
-                        <Button titleStyle={{color:'#000'}} buttonStyle={styles.buttonCustom}>+</Button>
-                        <View><Text>0</Text></View>
-                        <Button titleStyle={{color:'#000'}} buttonStyle={styles.buttonCustom}>-</Button>
-                    </View> */}
             </ListItem.Content>
         </ListItem>
     )
@@ -83,18 +82,6 @@ const styles = StyleSheet.create({
         fontWeight:'600',
         color:'#000',
         fontFamily:'Helvetica'
-    },
-    containerButton: {
-        flex:1,
-        display:'flex',
-        flexDirection:'row',
-        justifyContent:'space-between',
-        alignItems:'center',
-        backgroundColor:'#00FF7F',
-        width: (Dimensions.get('window').width -50 ),
-    },
-    buttonCustom: {
-        backgroundColor:'#00FF7F',
     }
 })
 

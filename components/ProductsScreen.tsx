@@ -8,6 +8,11 @@ import ListProductScreen from './products/ListProductScreen'
 const ProductsScreeen = () => {
 
     const [getAllProducts, setGetAllProducts] = useState<ListProduct[]>([])
+
+
+
+
+
     const getData = async() => {
         try{
           const querySnapshot = await getDocs(collection(db, 'user'))
@@ -37,7 +42,7 @@ const ProductsScreeen = () => {
       },[])
 
     return(
-    <View>
+    <View style={{marginTop:80}}>
         <FlatList
           data={getAllProducts}
           keyExtractor={(item:ListProduct) => item.id}

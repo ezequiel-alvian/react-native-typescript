@@ -2,7 +2,10 @@ import React from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 import { Dimensions } from "react-native"
 
-const TabletPromotion = ({ promotion } : {promotion:number}) => {
+
+
+const TabletPromotion: React.FC<{ promotion: number }> = ({ promotion }) => {
+//const TabletPromotion = ({ promotion }:{ promotion: number }) => {
     return(
         <View style={styles.tabletPromotion}>
             <Text style={styles.tabletPromotionText}>{`-${promotion}%`}</Text>
