@@ -11,6 +11,7 @@ export interface ListProduct {
     surname: string
     id: string
     promotion: number
+    amountBuy?: number
 }
 
 
@@ -30,5 +31,10 @@ export type Nav = {
 export type RootStackParamList = {
     Home: undefined
     SpecificProduct: undefined
-  };
+}
+
+export interface IProps {
+    count: number
+    setCount: (count: number) => void
+  }
 

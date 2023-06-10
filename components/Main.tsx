@@ -5,6 +5,8 @@ import { NavigationContainer } from '@react-navigation/native'
 import { Ionicons } from '@expo/vector-icons'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { getFocusedRouteNameFromRoute } from '@react-navigation/native'
+import { useNavigation } from '@react-navigation/native'
+import { useSelector } from "react-redux"
 
 import HomeScreen from './HomeScreen'
 import SettingsScreen from './SettingsScreen'
@@ -27,16 +29,35 @@ const getTabBarVisibility:Foo = (route) => {
 };
 
 function  HomeTabs() {
+  const { navigate } = useNavigation<any>()
+  const tasks = useSelector((state: { tasks:any }) => state.tasks)
+  const { product } = tasks
   return(   
-  <Stack.Navigator>
+  <Stack.Navigator
+      screenOptions={{ headerBackTitleVisible: false }}
+      >
     <Stack.Screen 
-      options={{headerShown: false}}
+      options={{headerShown: false }}
       name="Home" 
       component={HomeScreen} 
     />
     <Stack.Screen 
       name="SpecificProduct" 
       component={SpecificProductScreen} 
+      options={{ 
+        title:`${product}` ,  
+        headerBackTitleVisible:false,
+        //headerShown:false
+        headerLeft:({ canGoBack }) =>
+        canGoBack && (
+          <Ionicons
+            name="arrow-back-outline"
+            onPress={() => navigate('Products')}
+            color="#333"
+            size={30}
+          />
+        )
+      }}
     />
   </Stack.Navigator>
   )
