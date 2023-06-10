@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react'
 import { View, Text, StyleSheet, TouchableHighlight } from 'react-native'
 import { ListProduct, Nav } from '../../types/types'
-import { ListItem, Button } from '@rneui/themed'
+import { ListItem } from '@rneui/themed'
 import TabletPromotion from './TabletPromotion'
 import { useNavigation } from '@react-navigation/native'
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux"
 import { addTasks } from '../../reducer/productsReducer'
 
 const ListProductScreen = ({item}: { item: ListProduct }) => {
@@ -34,6 +34,7 @@ const ListProductScreen = ({item}: { item: ListProduct }) => {
         </ListItem>
     )
 }
+
 
 const styles = StyleSheet.create({
     cardDisplay:{

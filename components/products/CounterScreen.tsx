@@ -1,17 +1,15 @@
-import React,{useState} from 'react'
+import React from 'react'
 import { View, Text, StyleSheet, Dimensions } from 'react-native'
 import { Button } from '@rneui/themed'
+import { IProps } from '../../types/types'
 
-const CounterScreen = ()=> {
-    const [count, setCount] = useState<number>(0)
+const CounterScreen: React.FC<IProps> = ({count, setCount})=> {
 
     const handleIcrease = () => setCount(count + 1)
     const handleDecrease = () => {
         if (count === 0) return
         setCount(count - 1) 
     }
-
-
 
     return(
         <View style={styles.containerButton}>
@@ -39,7 +37,7 @@ const styles = StyleSheet.create({
         justifyContent:'space-between',
         alignItems:'center',
         backgroundColor:'#00FF7F',
-        width: (Dimensions.get('window').width -50 ),
+        width: (Dimensions.get('window').width -20 ),
     },
     buttonCustom: {
         backgroundColor:'#00FF7F',
