@@ -14,7 +14,6 @@ export interface ListProduct {
     amountBuy?: number
 }
 
-
 export interface RouteScreens {
     key?: string | undefined
     name?: string | undefined
@@ -22,7 +21,6 @@ export interface RouteScreens {
 }
 
 export type Foo = (route: RouteScreens) => void
-
 
 export type Nav = {
     navigate: (value: string) => void;
@@ -36,5 +34,5 @@ export type RootStackParamList = {
 export interface IProps {
     count: number
     setCount: (count: number) => void
-  }
+}
 

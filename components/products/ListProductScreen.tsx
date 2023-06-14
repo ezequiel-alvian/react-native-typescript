@@ -5,20 +5,24 @@ import { ListItem } from '@rneui/themed'
 import TabletPromotion from './TabletPromotion'
 import { useNavigation } from '@react-navigation/native'
 import { useDispatch } from "react-redux"
-import { addTasks } from '../../reducer/productsReducer'
+import { addProducts } from '../../reducer/productsReducer'
 
 const ListProductScreen = ({item}: { item: ListProduct }) => {
-    
-    const { navigate } = useNavigation<Nav>()
-    const dispatch = useDispatch()
 
     const onPress = ({item}:{item:ListProduct}) => { 
+        
+        const { navigate } = useNavigation<Nav>()
+        const dispatch = useDispatch()
         navigate('SpecificProduct') 
-        dispatch(addTasks(item))
+        dispatch(addProducts(item))
     }
     
     return (
-        <ListItem style={styles.cardContainer} onPress={()=> onPress({item})}>
+        <ListItem 
+            style={styles.cardContainer} 
+            onPress={()=> onPress({item})}
+            testID="myButton"
+            >
             <ListItem.Content key={item.id}>
                     {item.promotion && <TabletPromotion promotion={item.promotion}/>}
                     <View style={styles.cardDisplay}>

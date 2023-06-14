@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, Text } from 'react-native'
 
-const SettingsScreen = () => {
+const StoreScreen = () => {
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
         <Text>Buy store!</Text>
@@ -9,4 +9,4 @@ const SettingsScreen = () => {
     );
   }
 
-export default SettingsScreen
+export default StoreScreen

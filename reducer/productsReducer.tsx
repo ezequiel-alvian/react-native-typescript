@@ -9,16 +9,16 @@ const initialState: State = {
     todos:[]
 } 
 
-const tasksSlice = createSlice({
-    name:'tasks',
+const productsSlice = createSlice({
+    name:'products',
     initialState,
     reducers:{
-        addTasks:(state, action)=>{
+        addProducts:(state, action) => {
             const task = action.payload
             return {...task}
-        }
+        },
     }
 })
 
-export const { addTasks } = tasksSlice.actions;
-export default tasksSlice.reducer;
+export const { addProducts } = productsSlice.actions;
+export default productsSlice.reducer;

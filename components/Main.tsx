@@ -9,7 +9,7 @@ import { useNavigation } from '@react-navigation/native'
 import { useSelector } from "react-redux"
 
 import HomeScreen from './HomeScreen'
-import SettingsScreen from './SettingsScreen'
+import StoreScreen from './StoreScreen'
 import ProductsScreen from './ProductsScreen'
 import SpecificProductScreen from './products/SpecificProductScreen'
 import UserScreen from './UserScreen'
@@ -30,8 +30,8 @@ const getTabBarVisibility:Foo = (route) => {
 
 function  HomeTabs() {
   const { navigate } = useNavigation<any>()
-  const tasks = useSelector((state: { tasks:any }) => state.tasks)
-  const { product } = tasks
+  const products = useSelector((state: { products:any }) => state.products)
+  const { product } = products
   return(   
   <Stack.Navigator
       screenOptions={{ headerBackTitleVisible: false }}
@@ -90,7 +90,7 @@ export default function Main() {
           />
           <Tab.Screen 
             name="Settings" 
-            component={SettingsScreen}
+            component={StoreScreen}
             options={{
               tabBarBadge: 3,
               tabBarBadgeStyle: {backgroundColor: '#5BFF1E'},

@@ -7,9 +7,9 @@ import { ListProduct, Nav } from '../../types/types'
 import { Button } from '@rneui/themed'
 
 const SpecificProductScreen = () => {
-  const tasks = useSelector((state: { tasks:ListProduct }) => state.tasks)
+  const products = useSelector((state: { products:ListProduct }) => state.products)
   const { navigate } = useNavigation<Nav>()
-  const { product, city, price, location, amount } = tasks
+  const { product, city, price, location, amount } = products
   const [count, setCount] = useState(0)
 
   useEffect(()=>{
