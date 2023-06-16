@@ -1,23 +1,39 @@
-import React from 'react'
-import { create, act } from 'react-test-renderer'
+import { render, fireEvent } from '@testing-library/react-native'
+import data from './data/data.json' 
 import ListProductScreen from '../components/products/ListProductScreen'
-import data from './data.json' 
-import { ListItem } from '@rneui/base'
+
+let mockedNavigation= jest.fn(()=> 'SpecificProduct')
+
+jest.mock('@react-navigation/native', () => {
+    const actualNav = jest.requireActual(('@react-navigation/native' as any))
+return {
+    ...actualNav,
+    useNavigation: () => ({
+        navigate:mockedNavigation
+    }),
+}
+})
+
+jest.mock('react-redux', ()=>{
+   const actualDis = jest.requireActual('react-redux' as any)
+   return {
+    ...actualDis,
+    useDispatch:()=> jest.fn()
+   }
+})
 
 describe('<ListProductScreen/>', () => {
-    const item =data
-    const component:any = create(<ListProductScreen item={item}></ListProductScreen>)
-    
-    test('<ListProductScreen/>', () => {
-        expect(component).toMatchSnapshot()
+    const item =  data
+    let component
+    beforeEach(() => {
+        mockedNavigation.mockClear()
     })
-
-    test('button touch', ()=>{
-        const buttonTouch = component.root.findByProps({testID:'myButton'}).props
-        console.log(buttonTouch)
-        act(()=> buttonTouch.onPress())
+    test('ListProduct', () => {
+        component = render(<ListProductScreen item={item}/>)
+        const button = component.getByTestId('myButton')
+        fireEvent.press(button)
+        expect(component.toJSON()).toMatchSnapshot()
     })
-
 })
 
 

@@ -7,12 +7,17 @@ import { useNavigation } from '@react-navigation/native'
 import { useDispatch } from "react-redux"
 import { addProducts } from '../../reducer/productsReducer'
 
+interface propsPress {
+    navigate:string
+    list:Nav['navigate']
+}
+
 const ListProductScreen = ({item}: { item: ListProduct }) => {
+    const { navigate } = useNavigation<Nav>()
+    const dispatch = useDispatch()     
+
 
     const onPress = ({item}:{item:ListProduct}) => { 
-        
-        const { navigate } = useNavigation<Nav>()
-        const dispatch = useDispatch()
         navigate('SpecificProduct') 
         dispatch(addProducts(item))
     }
@@ -40,7 +45,7 @@ const ListProductScreen = ({item}: { item: ListProduct }) => {
 }
 
 
-const styles = StyleSheet.create({
+export const styles = StyleSheet.create({
     cardDisplay:{
         display: 'flex',
         justifyContent:'flex-start',

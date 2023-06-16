@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<ListProductScreen/> <ListProductScreen/> 1`] = `
+exports[`<ListProductScreen/> ListProduct 1`] = `
 <View
   accessibilityState={
     {

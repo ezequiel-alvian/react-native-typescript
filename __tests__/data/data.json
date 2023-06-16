@@ -1,4 +1,5 @@
-{    "amount" : 40,
+{    
+    "amount" : 40,
     "available": false,
     "city": "Roca",
     "location": "Roca",

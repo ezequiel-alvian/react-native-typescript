@@ -2,15 +2,12 @@ import React, { useState, useEffect } from 'react'
 import { View, Text, FlatList } from 'react-native'
 import { collection, getDocs } from 'firebase/firestore'
 import db from '../database/database'
-import { ListProduct } from '../types/types'
+import { ListProduct,Nav } from '../types/types'
 import ListProductScreen from './products/ListProductScreen'
 
 const ProductsScreeen = () => {
 
     const [getAllProducts, setGetAllProducts] = useState<ListProduct[]>([])
-
-
-
 
 
     const getData = async() => {
