@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<TabletPromotion/> test 1`] = `
+<View
+  style={
+    {
+      "alignItems": "flex-end",
+      "display": "flex",
+      "flexDirection": "column",
+      "justifyContent": "flex-end",
+      "width": 710,
+    }
+  }
+>
+  <Text
+    style={
+      {
+        "backgroundColor": "#00FF7F",
+        "padding": 5,
+      }
+    }
+  >
+    -25%
+  </Text>
+</View>
+`;
