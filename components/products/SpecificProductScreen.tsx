@@ -1,4 +1,4 @@
-import React,{ useState, useEffect } from 'react'
+import React,{ useState } from 'react'
 import { Text, View, StyleSheet } from 'react-native'
 import { useSelector } from "react-redux"
 import CounterScreen from './CounterScreen'
@@ -12,9 +12,6 @@ const SpecificProductScreen = () => {
   const { product, city, price, location, amount } = products
   const [count, setCount] = useState(0)
 
-  useEffect(()=>{
-    if(count !== 0) setCount(0)
-},[])
 
   const onPress = () => {
     navigate('Settings')
