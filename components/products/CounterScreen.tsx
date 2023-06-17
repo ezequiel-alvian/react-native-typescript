@@ -7,8 +7,7 @@ const CounterScreen: React.FC<IProps> = ({count, setCount})=> {
 
     const handleIcrease = () => setCount(count + 1)
     const handleDecrease = () => {
-        if (count === 0) return
-        setCount(count - 1) 
+        if (count === 0) return setCount(count - 1) 
     }
 
     return(
