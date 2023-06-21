@@ -13,6 +13,7 @@ import StoreScreen from './StoreScreen'
 import ProductsScreen from './ProductsScreen'
 import SpecificProductScreen from './products/SpecificProductScreen'
 import UserScreen from './UserScreen'
+import { State } from '../types/types'
 
 import { Foo, RootStackParamList } from '../types/types'
 
@@ -30,8 +31,8 @@ const getTabBarVisibility:Foo = (route) => {
 
 function  HomeTabs() {
   const { navigate } = useNavigation<any>()
-  const products = useSelector((state: { products:any }) => state.products)
-  const { product } = products
+  const products = useSelector((state: { products:State }) => state.products.todos)
+  const [{ product }] = products
   return(   
   <Stack.Navigator
       screenOptions={{ headerBackTitleVisible: false }}

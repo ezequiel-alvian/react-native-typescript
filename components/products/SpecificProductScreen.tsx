@@ -1,24 +1,36 @@
-import React,{ useState } from 'react'
+import React,{ useState, useEffect } from 'react'
 import { Text, View, StyleSheet } from 'react-native'
 import { useSelector } from "react-redux"
 import CounterScreen from './CounterScreen'
 import { useNavigation } from '@react-navigation/native'
-import { ListProduct, Nav } from '../../types/types'
+import { ListProduct, Nav, State } from '../../types/types';
 import { Button } from '@rneui/themed'
+import { v4 as uuidv4 } from 'uuid'
+import {addProducts} from '../../reducer/productsReducer'
+import { useDispatch } from 'react-redux'
+import "react-native-get-random-values"
+
 
 const SpecificProductScreen = () => {
-  const products = useSelector((state: { products:ListProduct }) => state.products)
+  const products = useSelector((state: { products:State }) => state.products.todos)
   const { navigate } = useNavigation<Nav>()
-  const { product, city, price, location, amount } = products
+  console.log('soy el products',products)
+  const [{ product, city, price, location, amount }] = products
   const [count, setCount] = useState(0)
+  const dispatch = useDispatch()   
 
-
-  const onPress = () => {
+  const onPress = ( products:ListProduct[]) => {
     navigate('Settings')
+    const id = uuidv4()
+    console.log('soy el products', products)
+    dispatch(addProducts(products))
   }
 
     return(
     <View style={styles.container}>
+        <View style={styles.containerImage}>
+          <View style={styles.cardImage}></View>
+        </View>
         <View style={styles.containerInfo}>
           <View style={styles.displayInfo}>
             <Text>Product</Text>
@@ -41,9 +53,6 @@ const SpecificProductScreen = () => {
             <Text>{amount}</Text>
           </View>
         </View>
-        <View style={styles.containerImage}>
-          <View style={styles.cardImage}></View>
-        </View>
         <CounterScreen
           setCount={setCount}
           count={count}
@@ -53,7 +62,7 @@ const SpecificProductScreen = () => {
             backgroundColor:'#00FF7F',
             marginTop:10
           }}
-          onPress={onPress}
+          onPress={()=> onPress(products) }
         >Agregar</Button>
     </View>
     )

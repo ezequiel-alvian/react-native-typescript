@@ -5,7 +5,7 @@ import { ListItem } from '@rneui/themed'
 import TabletPromotion from './TabletPromotion'
 import { useNavigation } from '@react-navigation/native'
 import { useDispatch } from "react-redux"
-import { addProducts } from '../../reducer/productsReducer'
+import { selectProducts } from '../../reducer/productsReducer'
 
 interface propsPress {
     navigate:string
@@ -19,7 +19,7 @@ const ListProductScreen = ({item}: { item: ListProduct }) => {
 
     const onPress = ({item}:{item:ListProduct}) => { 
         navigate('SpecificProduct') 
-        dispatch(addProducts(item))
+        dispatch(selectProducts(item))
     }
     
     return (
