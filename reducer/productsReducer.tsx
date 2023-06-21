@@ -1,24 +1,25 @@
-import { ListProduct } from '../types/types'
-import { createSlice } from "@reduxjs/toolkit";
+import { ListProduct, State } from '../types/types'
+import { createSlice, PayloadAction} from "@reduxjs/toolkit";
 
-type State = {
-    todos:ListProduct[] | undefined
-}
 
 const initialState: State = {
-    todos:[]
+    todos:[],
+    addProducts:[]
 } 
 
 const productsSlice = createSlice({
     name:'products',
     initialState,
     reducers:{
-        addProducts:(state, action) => {
-            const task = action.payload
-            return {...task}
+        selectProducts:(state, action) => {
+            state.todos.push(action.payload)
         },
+        addProducts: (state, action) => {
+          state.addProducts = [...state.addProducts, ...action.payload]
+          console.log('SOY EL STATE', state)
+        }
     }
 })
 
-export const { addProducts } = productsSlice.actions;
-export default productsSlice.reducer;
+export const { selectProducts, addProducts } = productsSlice.actions
+export default productsSlice.reducer

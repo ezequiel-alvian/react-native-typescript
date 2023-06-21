@@ -36,3 +36,9 @@ export interface IProps {
     setCount: (count: number) => void
 }
 
+
+export type State = {
+    todos:ListProduct[]
+    addProducts:ListProduct[]
+}
+
