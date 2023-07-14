@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { View, Text, StyleSheet, TouchableHighlight } from 'react-native'
+import { View, Text, StyleSheet, TouchableHighlight,Image } from 'react-native'
 import { ListProduct, Nav } from '../../types/types'
 import { ListItem } from '@rneui/themed'
 import TabletPromotion from './TabletPromotion'
@@ -14,8 +14,7 @@ interface propsPress {
 
 const ListProductScreen = ({item}: { item: ListProduct }) => {
     const { navigate } = useNavigation<Nav>()
-    const dispatch = useDispatch()     
-
+    const dispatch = useDispatch() 
 
     const onPress = ({item}:{item:ListProduct}) => { 
         navigate('SpecificProduct') 
@@ -27,11 +26,21 @@ const ListProductScreen = ({item}: { item: ListProduct }) => {
             style={styles.cardContainer} 
             onPress={()=> onPress({item})}
             testID="myButton"
+            key={item.id}
             >
-            <ListItem.Content key={item.id}>
+            <ListItem.Content >
                     {item.promotion && <TabletPromotion promotion={item.promotion}/>}
                     <View style={styles.cardDisplay}>
-                        <View style={styles.cardImage}></View>
+                    {item.images !== undefined ?
+                     item.images.map((image)=>
+                        <Image 
+                        style={styles.cardImage}
+                        source={{uri:`${image?.media}`}}
+                        />
+                     )
+                        :null
+                     
+                    }
                         <View style={styles.containerText}>
                             <ListItem.Title style={styles.title}>{item.product}</ListItem.Title>
                             <ListItem.Subtitle style={styles.subTitle}>{item.city} - {item.location}</ListItem.Subtitle>
@@ -63,14 +72,13 @@ export const styles = StyleSheet.create({
     cardImage: {
         width: 60,
         height: 60,
-        backgroundColor:'#00FF7F',
-        marginRight:20,
+        marginRight:15
     },
     containerText:{
         marginBottom:5
     },
     title: {
-        fontSize:20,
+        fontSize:16,
         fontWeight:'bold',
         fontFamily:'Helvetica'
     },

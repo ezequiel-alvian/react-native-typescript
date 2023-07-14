@@ -1,7 +1,7 @@
 import React,{ useState, useEffect } from 'react'
-import { Text, View, StyleSheet } from 'react-native'
+import { Text, View, StyleSheet,Dimensions, Image } from 'react-native'
 import { useSelector } from "react-redux"
-import CounterScreen from './CounterScreen'
+import PureCounterScreen from './PureCounterScreen'
 import { useNavigation } from '@react-navigation/native'
 import { ListProduct, Nav, State } from '../../types/types';
 import { Button } from '@rneui/themed'
@@ -10,26 +10,33 @@ import {addProducts} from '../../reducer/productsReducer'
 import { useDispatch } from 'react-redux'
 import "react-native-get-random-values"
 
-
 const SpecificProductScreen = () => {
   const products = useSelector((state: { products:State }) => state.products.todos)
   const { navigate } = useNavigation<Nav>()
-  console.log('soy el products',products)
-  const [{ product, city, price, location, amount }] = products
+  const [{ product, city, price, location, amount, images }] = products
   const [count, setCount] = useState(0)
-  const dispatch = useDispatch()   
+  const dispatch = useDispatch() 
 
   const onPress = ( products:ListProduct[]) => {
     navigate('Settings')
     const id = uuidv4()
-    console.log('soy el products', products)
-    dispatch(addProducts(products))
+    let amountBuy = count
+    let product = products.map(product => ({...product, amountBuy}))
+    dispatch(addProducts(product))
   }
 
     return(
     <View style={styles.container}>
         <View style={styles.containerImage}>
-          <View style={styles.cardImage}></View>
+        {
+        images !== undefined ?
+        images.map((image)=>
+          <Image
+          style={styles.cardImage}
+          source={{uri:`${image?.great}`}}
+          />)
+          : null
+      }
         </View>
         <View style={styles.containerInfo}>
           <View style={styles.displayInfo}>
@@ -53,7 +60,8 @@ const SpecificProductScreen = () => {
             <Text>{amount}</Text>
           </View>
         </View>
-        <CounterScreen
+        <PureCounterScreen
+          styles={styles}
           setCount={setCount}
           count={count}
           />
@@ -77,8 +85,6 @@ const SpecificProductScreen = () => {
     cardImage: {
       width: 320,
       height: 320,
-      backgroundColor:'#DAFFCD',
-      marginBottom:15
     },
     displayInfo: {
       display:'flex',
@@ -98,6 +104,17 @@ const SpecificProductScreen = () => {
       justifyContent:'center',
       alignItems:'center',
       alignSelf:'center'
-    }
+    },
+    containerButton: {
+      display:'flex',
+      flexDirection:'row',
+      justifyContent:'space-between',
+      alignItems:'center',
+      backgroundColor:'#00FF7F',
+      width: (Dimensions.get('window').width -20 ),
+  },
+  buttonCustom: {
+      backgroundColor:'#00FF7F',
+  },
   })
 export default SpecificProductScreen

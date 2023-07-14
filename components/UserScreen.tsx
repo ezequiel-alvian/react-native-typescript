@@ -1,6 +1,6 @@
 import React from 'react'
 import { View, Text, StyleSheet } from 'react-native'
-import { Button } from '@rneui/themed'
+import { Button, Avatar } from '@rneui/themed'
 
 const UserScreen = () => {
 
@@ -11,13 +11,15 @@ const UserScreen = () => {
           </View>
         )
         }
-
-
-
     return (
         <View style={styles.container}>
             <View style={styles.containerTop}>
-                <View style={styles.pictureUser}></View>
+                <Avatar
+                    size={140}
+                    rounded
+                    source={ {uri: 'https://cdn.pixabay.com/photo/2020/09/18/05/58/lights-5580916__340.jpg' }}
+                    key={`0`}
+                />
                 <View>
                     <Text style={styles.titleUser}>Lucas Rodriguez</Text>
                 </View>
@@ -31,12 +33,6 @@ const UserScreen = () => {
                     buttonStyle={styles.styleButton}
                     ></Button>
                 </View>
-            </View>
-            <View>
-                <Text>User Screen</Text>
-            </View>
-            <View >
-            <Text>User Screen</Text>
             </View>
         </View>
     )

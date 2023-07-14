@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react'
-import { View, Text, FlatList } from 'react-native'
+import { View, Text, FlatList, SafeAreaView, StyleSheet } from 'react-native'
 import { collection, getDocs } from 'firebase/firestore'
 import db from '../database/database'
 import { ListProduct,Nav } from '../types/types'
 import ListProductScreen from './products/ListProductScreen'
+import ProductSearchScreen from './products/ProductSearchScreen'
 
 const ProductsScreeen = () => {
 
@@ -15,7 +16,7 @@ const ProductsScreeen = () => {
           const querySnapshot = await getDocs(collection(db, 'user'))
           const users:Array<ListProduct> = []
           await querySnapshot.forEach((doc) => {
-            const { amount, available, location, city, name, price, product, surname, promotion } = doc.data()
+            const { amount, available, location, city, name, price, product, surname, promotion,amountBuy,images } = doc.data()
             console.log(amount,available)
             users.push({
               id: doc.id,
@@ -27,7 +28,9 @@ const ProductsScreeen = () => {
               price,
               product,
               surname,
-              promotion
+              promotion,
+              amountBuy,
+              images
             });
           });
           setGetAllProducts(users)
@@ -39,14 +42,22 @@ const ProductsScreeen = () => {
       },[])
 
     return(
-    <View style={{marginTop:80}}>
+      <View style={styles.container}>
+        <ProductSearchScreen/>
         <FlatList
           data={getAllProducts}
           keyExtractor={(item:ListProduct) => item.id}
           renderItem={({item}: { item: ListProduct })=> <ListProductScreen item={item}/>}
         />  
-    </View>
+      </View>
     )
 }
+
+const styles = StyleSheet.create({
+  container:{
+    marginTop:80,
+    marginBottom:100
+  }
+})
 
 export default ProductsScreeen

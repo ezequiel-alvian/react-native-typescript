@@ -31,11 +31,9 @@ const getTabBarVisibility:Foo = (route) => {
 
 function  HomeTabs() {
   const { navigate } = useNavigation<any>()
-  const products = useSelector((state: { products:State }) => state.products.todos)
-  const [{ product }] = products
   return(   
   <Stack.Navigator
-      screenOptions={{ headerBackTitleVisible: false }}
+      // screenOptions={{ headerBackTitleVisible: false }}
       >
     <Stack.Screen 
       options={{headerShown: false }}
@@ -46,8 +44,8 @@ function  HomeTabs() {
       name="SpecificProduct" 
       component={SpecificProductScreen} 
       options={{ 
-        title:`${product}` ,  
-        headerBackTitleVisible:false,
+        title:`${'GreenWin'}` ,  
+        // headerBackTitleVisible:false,
         //headerShown:false
         headerLeft:({ canGoBack }) =>
         canGoBack && (
@@ -65,15 +63,27 @@ function  HomeTabs() {
 }
 
 export default function Main() {
+
+  const amount = useSelector((state : { products:State })=> state.products.amount )
+  console.log(amount)
   return (
     <NavigationContainer>
         <Tab.Navigator
+        sceneContainerStyle={{
+          // backgroundColor:'#fff'
+        }}
         screenOptions={{
           headerShown: false,
           tabBarShowLabel: false,
           // tabBarStyle: {backgroundColor: '#AD40AF'},
           tabBarInactiveTintColor: '#858585',
           tabBarActiveTintColor: '#5BFF1E',
+          tabBarStyle:{
+            backgroundColor:'rgba(255,255,255,0.82)',
+            borderWidth:0,
+            elevation:0,
+            position:'absolute'
+          }
         }}
         >
           <Tab.Screen 
@@ -93,7 +103,8 @@ export default function Main() {
             name="Settings" 
             component={StoreScreen}
             options={{
-              tabBarBadge: 3,
+              title:'Buy Store',
+              tabBarBadge: amount ? amount : null,
               tabBarBadgeStyle: {backgroundColor: '#5BFF1E'},
               tabBarIcon: ({color, size}) => (
                 <Ionicons name="md-cart" color={color} size={size} />
@@ -128,6 +139,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'center'
   },
 })
